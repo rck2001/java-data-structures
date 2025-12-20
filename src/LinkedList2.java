@@ -1,10 +1,10 @@
-public class LinkedList2 {
+public class LinkedList2<T> {
 
-    private static class Node {
-        int data;
+    private class Node {
+        T data;
         Node next;
 
-        Node(int data) {
+        Node(T data) {
             this.data = data;
             this.next = null;
         }
@@ -14,7 +14,7 @@ public class LinkedList2 {
     private int size = 0; // initial size is zero
 
     // insertion and deletion methods
-    public void insertAtBeg(int data) {
+    public void insertAtBeg(T data) {
         Node newNode = new Node(data);
 
         if(head == null) { // when the list is empty
@@ -27,7 +27,7 @@ public class LinkedList2 {
         head = newNode;
         size++;
     }
-    public void insertAtEnd(int data) {
+    public void insertAtEnd(T data) {
         Node newNode = new Node(data);
 
         if(head == null) {
@@ -44,7 +44,7 @@ public class LinkedList2 {
         temp.next = newNode;
         size++;
     }
-    public void insertAtAnyPos(int data, int pos) {
+    public void insertAtAnyPos(T data, int pos) {
         Node newNode = new Node(data);
 
         if(pos < 1 || pos > size + 1) { // check if position is valid [1, size + 1]
@@ -101,7 +101,7 @@ public class LinkedList2 {
     public void deleteAtAnyPos(int pos) {
 
         if(pos < 1 || pos > size) {
-            System.out.println("Invalid postion.");
+            System.out.println("Invalid position.");
             return;
         }
 
