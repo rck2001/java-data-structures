@@ -1,8 +1,8 @@
 public class LinkedList2<T> {
 
-    private class Node {
+    private static class Node<T> {
         T data;
-        Node next;
+        Node<T> next;
 
         Node(T data) {
             this.data = data;
@@ -10,12 +10,12 @@ public class LinkedList2<T> {
         }
     }
 
-    private Node head = null; // initial list is empty
+    private Node<T> head = null; // initial list is empty
     private int size = 0; // initial size is zero
 
     // insertion and deletion methods
     public void insertAtBeg(T data) {
-        Node newNode = new Node(data);
+        Node<T> newNode = new Node<>(data);
 
         if(head == null) { // when the list is empty
             head = newNode;
@@ -28,7 +28,7 @@ public class LinkedList2<T> {
         size++;
     }
     public void insertAtEnd(T data) {
-        Node newNode = new Node(data);
+        Node<T> newNode = new Node<>(data);
 
         if(head == null) {
             head = newNode;
@@ -36,7 +36,7 @@ public class LinkedList2<T> {
             return;
         }
 
-        Node temp = head;
+        Node<T> temp = head;
         while(temp.next != null) { // temp stops at the last position
             temp = temp.next;
         }
@@ -45,7 +45,7 @@ public class LinkedList2<T> {
         size++;
     }
     public void insertAtAnyPos(T data, int pos) {
-        Node newNode = new Node(data);
+        Node<T> newNode = new Node<>(data);
 
         if(pos < 1 || pos > size + 1) { // check if position is valid [1, size + 1]
             System.out.println("Invalid position.");
@@ -57,7 +57,7 @@ public class LinkedList2<T> {
             return;
         }
 
-        Node temp = head;
+        Node<T> temp = head;
         int count = 1;
         while(temp.next != null && count < pos - 1) {
             temp = temp.next;
@@ -90,7 +90,7 @@ public class LinkedList2<T> {
             return;
         }
 
-        Node temp = head;
+        Node<T> temp = head;
         while(temp.next.next != null) { // temp stops at the second last position
             temp = temp.next;
         }
@@ -110,9 +110,9 @@ public class LinkedList2<T> {
             return;
         }
 
-        Node temp = head;
+        Node<T> temp = head;
         int count = 1;
-        while(temp.next.next != null && count < pos - 1) {
+        while(count < pos - 1) {
             count++;
             temp = temp.next;
         }
@@ -124,12 +124,11 @@ public class LinkedList2<T> {
     // utility methods
     @Override
     public String toString() {
-        Node temp = head;
+        Node<T> temp = head;
 
         // if list is empty
         if(head == null) {
-            System.out.println("List is empty.");
-            return null;
+            return "List is empty.";
         }
 
         StringBuilder sb = new StringBuilder();

@@ -1,7 +1,7 @@
 public class LinkedList2Main {
     public static void main(String[] args) {
 
-        LinkedList2 list = new LinkedList2();
+        LinkedList2<Integer> list = new LinkedList2<>();
 
         list.insertAtBeg(1);
         list.insertAtBeg(2);
