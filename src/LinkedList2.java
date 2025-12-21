@@ -1,6 +1,10 @@
 public class LinkedList2<T> {
 
     private static class Node<T> {
+        // T here is not related to T in the outer class
+        // since the inner class is static it doesn't belong to any outer object
+        // outer class parameter is replaced by the type received in the object creation
+        // so static inner class cannot infer the type T from the outer classes' T parameter
         T data;
         Node<T> next;
 
@@ -10,8 +14,9 @@ public class LinkedList2<T> {
         }
     }
 
-    private Node<T> head = null; // initial list is empty
-    private int size = 0; // initial size is zero
+    private Node<T> head = null; // parameter T of the outer class is sent as argument to the Node class
+    // So the compiler can infer that T of the Node class should be the same as the T of the outer class
+    private int size = 0;
 
     // insertion and deletion methods
     public void insertAtBeg(T data) {
