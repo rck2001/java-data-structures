@@ -1,10 +1,15 @@
 public class LinkedList2<T> {
 
+    /*
+     * test-branch
+     */
+
     private static class Node<T> {
         // T here is not related to T in the outer class
         // since the inner class is static it doesn't belong to any outer object
         // outer class parameter is replaced by the type received in the object creation
         // so static inner class cannot infer the type T from the outer classes' T parameter
+
         T data;
         Node<T> next;
 
