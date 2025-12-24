@@ -15,10 +15,15 @@ public class LinkedList2Main {
         list.deleteAtEnd();
         list.deleteAtAnyPosition(3);
         list.reverse();
-        System.out.println(list.getIndexOf(33));
+        list.insertAtBeg(22);
+        list.insertAtEnd(22);
+        list.insertAtAnyPosition(33, 1);
+        list.insertAtAnyPosition(33, 3);
+        list.removeDuplicates();
 
         System.out.println(list);
         System.out.println("Size: " + list.getSize());
         System.out.println("Is the list empty?: " + list.isEmpty());
+        System.out.println("Index of 11 is: " + list.getIndexOf(11));
     }
 }

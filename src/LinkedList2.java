@@ -126,6 +126,26 @@ public class LinkedList2<T> {
         temp.next = temp.next.next;
         size--;
     }
+    public void removeDuplicates() {
+        Node<T> current = head;
+        Node<T> runner = null;
+
+        while(current != null) {
+            runner = current;
+
+            while(runner.next != null) {
+                if(current.data.equals(runner.next.data)) {
+                    runner.next = runner.next.next;
+                    size--;
+                }
+                else {
+                    runner = runner.next;
+                }
+            }
+
+            current = current.next;
+        }
+    }
 
     // utility methods
     @Override
