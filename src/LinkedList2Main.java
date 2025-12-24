@@ -15,6 +15,7 @@ public class LinkedList2Main {
         list.deleteAtEnd();
         list.deleteAtAnyPosition(3);
         list.reverse();
+        System.out.println(list.getIndexOf(33));
 
         System.out.println(list);
         System.out.println("Size: " + list.getSize());

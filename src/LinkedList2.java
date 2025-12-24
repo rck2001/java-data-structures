@@ -14,7 +14,8 @@ public class LinkedList2<T> {
         }
     }
 
-    private Node<T> head = null; // parameter T of the outer class is sent as argument to the Node class
+    private Node<T> head = null;
+    // parameter T of the outer class is sent as argument to the Node class
     // So the compiler can infer that T of the Node class should be the same as the T of the outer class
     private int size = 0;
 
@@ -148,9 +149,15 @@ public class LinkedList2<T> {
     }
     public boolean isEmpty() {
         return head == null;
+        // or
+        // return size == 0;
     }
     public int getSize() {
         return size;
+    }
+    public void clear() { // empty the list
+        head = null;
+        size = 0;
     }
     public void reverse() {
         Node<T> previous = null;
@@ -165,5 +172,21 @@ public class LinkedList2<T> {
         }
 
         head = previous;
+    }
+    public int getIndexOf(T data) {
+        // returns 0-based index of the element, or -1 if not found or list is empty
+        Node<T> temp = head;
+        int position = 1;
+
+        while(temp != null) {
+            if(temp.data.equals(data)) {
+               return position - 1;
+            }
+
+            temp = temp.next;
+            position++;
+        }
+
+        return -1;
     }
 }
