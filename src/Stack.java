@@ -2,14 +2,23 @@
 
 public class Stack {
 
-    private int size = 10;
-    private int[] arr = new int[size];
+    private final int size; // final size once assigned cannot be changed
+    private final int[] arr; // final array cannot point to a new array once assigned, so no dynamic resizing
     private int top = -1;
 
+    public Stack(int size) {
+        if(size <= 0) { // check if size is valid
+            throw new IllegalArgumentException("Size must be greater than 0.");
+        }
+
+        this.size = size;
+        this.arr = new int[size];
+    }
+
+    // general methods
     public void push(int data) {
         if(top == size - 1) {
-            System.out.println("Stack is full. Stack overflow.");
-            return;
+            throw new IllegalArgumentException("Stack is full. Stack overflow.");
         }
 
         top++;
@@ -19,21 +28,20 @@ public class Stack {
     }
     public int pop() {
         if(top == -1) {
-            System.out.println("Stack is empty. Stack underflow.");
-            return 0;
+            throw new IllegalArgumentException("Stack is empty. Stack underflow.");
         }
 
         return arr[top--];
     }
     public int peek() {
         if(top == -1) {
-            System.out.println("Stack is empty.");
-            return 0;
+            throw new IllegalArgumentException("Stack is empty.");
         }
 
         return arr[top];
     }
 
+    // display the array
     @Override
     public String toString() {
         if(top == -1) {

@@ -1,7 +1,7 @@
 public class StackMain {
     public static void main(String[] args) {
 
-        Stack stack = new Stack();
+        Stack stack = new Stack(10);
 
         stack.push(1);
         stack.push(2);
@@ -13,7 +13,8 @@ public class StackMain {
         stack.push(8);
         stack.pop(); // 8 popped
         stack.pop(); // 7 popped
-        System.out.println("Element popped: " + stack.pop());
+        stack.push(9999);
+        System.out.println("Element popped: " + stack.pop()); // 9999 popped
 
         System.out.println("Current element at the top of the stack is: " + stack.peek());
         System.out.println("The stack from top to bottom is: \n" + stack);
