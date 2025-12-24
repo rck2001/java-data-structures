@@ -8,7 +8,7 @@ public class Stack {
 
     public void push(int data) {
         if(top == size - 1) {
-            System.out.println("Stack is full! Stack overflow!");
+            System.out.println("Stack is full. Stack overflow.");
             return;
         }
 
@@ -17,36 +17,34 @@ public class Stack {
         // or arr[++top] = data;
         // System.out.println(data + " added to the stack.");
     }
-
-    public void pop() {
+    public int pop() {
         if(top == -1) {
-            System.out.println("Stack is empty! Stack underflow!");
-            return;
+            System.out.println("Stack is empty. Stack underflow.");
+            return 0;
         }
 
-        System.out.println(arr[top] + " removed from the stack.");
-        arr[top] = 0; // not really necessary
-        top--;
+        return arr[top--];
     }
-
-    public void peek() {
+    public int peek() {
         if(top == -1) {
             System.out.println("Stack is empty.");
-            return;
+            return 0;
         }
 
-        System.out.println(arr[top] + " is at the top of the stack.");
+        return arr[top];
     }
 
-    public void display() {
+    @Override
+    public String toString() {
         if(top == -1) {
-            System.out.println("Stack is empty!");
-            return;
+            return "Stack is empty.";
         }
 
-        System.out.println("The current stack: ");
+        StringBuilder sb = new StringBuilder();
         for(int i = top; i >= 0; i--) {
-            System.out.println(arr[i]);
+            sb.append(arr[i]).append('\n');
         }
+
+        return sb.toString();
     }
 }

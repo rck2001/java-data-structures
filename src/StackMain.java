@@ -11,11 +11,11 @@ public class StackMain {
         stack.push(6);
         stack.push(7);
         stack.push(8);
-        stack.pop();
-        stack.pop();
-        stack.pop();
+        stack.pop(); // 8 popped
+        stack.pop(); // 7 popped
+        System.out.println("Element popped: " + stack.pop());
 
-        stack.peek();
-        stack.display();
+        System.out.println("Current element at the top of the stack is: " + stack.peek());
+        System.out.println("The stack from top to bottom is: \n" + stack);
     }
 }
