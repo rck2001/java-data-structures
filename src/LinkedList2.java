@@ -49,7 +49,7 @@ public class LinkedList2<T> {
         temp.next = newNode;
         size++;
     }
-    public void insertAtAnyPos(T data, int pos) {
+    public void insertAtAnyPosition(T data, int pos) {
         Node<T> newNode = new Node<>(data);
 
         if(pos < 1 || pos > size + 1) { // check if position is valid [1, size + 1]
@@ -103,7 +103,7 @@ public class LinkedList2<T> {
         temp.next = null;
         size--;
     }
-    public void deleteAtAnyPos(int pos) {
+    public void deleteAtAnyPosition(int pos) {
 
         if(pos < 1 || pos > size) {
             System.out.println("Invalid position.");
@@ -151,5 +151,19 @@ public class LinkedList2<T> {
     }
     public int getSize() {
         return size;
+    }
+    public void reverse() {
+        Node<T> previous = null;
+        Node<T> current = head;
+        Node<T> next = null;
+
+        while(current != null) {
+            next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+
+        head = previous;
     }
 }

@@ -9,11 +9,12 @@ public class LinkedList2Main {
         list.insertAtEnd(11);
         list.insertAtEnd(22);
         list.insertAtEnd(33);
-        list.insertAtAnyPos(111, 7);
-        list.insertAtAnyPos(222, 1);
+        list.insertAtAnyPosition(111, 7);
+        list.insertAtAnyPosition(222, 1);
         list.deleteAtBeg();
         list.deleteAtEnd();
-        list.deleteAtAnyPos(3);
+        list.deleteAtAnyPosition(3);
+        list.reverse();
 
         System.out.println(list);
         System.out.println("Size: " + list.getSize());
