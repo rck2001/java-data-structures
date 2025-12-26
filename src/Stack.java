@@ -1,23 +1,24 @@
 // A stack is a last in first out (LIFO) data structure
 
-public class Stack {
+public class Stack<T> {
 
-    private final int capacity; // final size once assigned cannot be changed
-    private final int[] arr; // final array cannot point to a new array once assigned, so no dynamic resizing
+    private final int capacity;
+    private final T[] arr;
     private int top;
 
+    @SuppressWarnings("unchecked")
     public Stack(int capacity) {
         if(capacity <= 0) { // check if capacity is valid
             throw new IllegalArgumentException("Size must be greater than 0.");
         }
 
         this.capacity = capacity;
-        this.arr = new int[capacity];
+        this.arr = (T[]) new Object[capacity];
         this.top = -1; // stack is initially empty
     }
 
     // general methods
-    public void push(int data) {
+    public void push(T data) {
         if(top == capacity - 1) {
             throw new IllegalArgumentException("Stack is full. Stack overflow.");
         }
@@ -27,14 +28,14 @@ public class Stack {
         // or arr[++top] = data;
         // System.out.println(data + " added to the stack.");
     }
-    public int pop() {
+    public T pop() {
         if(top == -1) {
             throw new IllegalArgumentException("Stack is empty. Stack underflow.");
         }
 
         return arr[top--];
     }
-    public int peek() {
+    public T peek() {
         if(top == -1) {
             throw new IllegalArgumentException("Stack is empty.");
         }
