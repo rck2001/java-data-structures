@@ -1,18 +1,29 @@
 // Queue is a FIFO (First In First Out) data structure
-// The current queue implementation has false overflow
-// ,i.e, the rear and front only move forward
-// so when the queue is empty because rear < front
-// there is empty space in the queue (logically) which is not used
+
+// FALSE OVERFLOW = The queue is LOGICALLY EMPTY, but the implementation says FULL.
+// The current queue implementation has false overflow.
+
+// We can change the code to reset the queue, i.e, front = rear = -1, when the queue is logically empty.
+// But that is suboptimal.
+// A circular queue fixes this.
 
 public class LinearQueue {
 
-    private int capacity = 10;
-    private int[] arr = new int[capacity];
-    int front = -1, rear = -1;
+    private int capacity;
+    private int[] arr;
+    private int front, rear;
 
+    public LinearQueue(int capacity) {
+        this.capacity = capacity;
+        this.arr = new int[capacity];
+        this.front = -1;
+        this.rear = -1;
+    }
+
+    // general methods
     public void enqueue(int data) {
         if(rear == capacity - 1) {
-            System.out.println("Queue is full.");
+            System.out.println("Queue is full... Queue overflow");
             return;
         }
 
@@ -22,10 +33,9 @@ public class LinearQueue {
 
         arr[++rear] = data;
     }
-
     public int dequeue() {
         if(rear == -1 || rear < front) {
-            System.out.println("Queue is empty.");
+            System.out.println("Queue is empty... Queue underflow");
             return -1;
         }
 
@@ -33,20 +43,20 @@ public class LinearQueue {
         front++;
         return removed;
     }
-
     public int peek() {
         if(rear == -1 || rear < front) {
-            System.out.println("Queue is empty.");
+            System.out.println("Queue is empty");
             return -1;
         }
 
         return arr[front];
     }
 
+    // display
     @Override
     public String toString() {
-        if(rear == -1) {
-            return "Queue is empty.";
+        if(rear == -1 || rear < front) {
+            return "Queue is empty";
         }
 
         StringBuilder sb = new StringBuilder();
@@ -58,6 +68,8 @@ public class LinearQueue {
 
         return sb.toString();
     }
+
+    // utility methods
     public boolean isEmpty() {
         return rear == -1 || rear < front;
     }

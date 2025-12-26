@@ -42,7 +42,7 @@ public class Stack {
         return arr[top];
     }
 
-    // display the array
+    // display
     @Override
     public String toString() {
         if(top == -1) {
@@ -56,6 +56,8 @@ public class Stack {
 
         return sb.toString();
     }
+
+    // utility methods
     public boolean isFull() {
         return top == capacity - 1;
     }
