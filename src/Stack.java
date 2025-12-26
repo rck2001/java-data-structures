@@ -62,4 +62,7 @@ public class Stack {
     public boolean isEmpty() {
         return top == -1;
     }
+    public int getSize() {
+        return top + 1;
+    }
 }
