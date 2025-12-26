@@ -7,21 +7,22 @@
 // But that is suboptimal.
 // A circular queue fixes this.
 
-public class LinearQueue {
+public class LinearQueue<T> {
 
-    private int capacity;
-    private int[] arr;
+    private final int capacity;
+    private final T[] arr;
     private int front, rear;
 
+    @SuppressWarnings("unchecked")
     public LinearQueue(int capacity) {
         this.capacity = capacity;
-        this.arr = new int[capacity];
+        this.arr = (T[]) new Object[capacity];
         this.front = -1;
         this.rear = -1;
     }
 
     // general methods
-    public void enqueue(int data) {
+    public void enqueue(T data) {
         if(rear == capacity - 1) {
             System.out.println("Queue is full... Queue overflow");
             return;
@@ -33,20 +34,17 @@ public class LinearQueue {
 
         arr[++rear] = data;
     }
-    public int dequeue() {
+    public T dequeue() {
         if(rear == -1 || rear < front) {
             System.out.println("Queue is empty... Queue underflow");
-            return -1;
+            return null;
         }
 
-        int removed = arr[front];
-        front++;
-        return removed;
+        return arr[front++];
     }
-    public int peek() {
+    public T peek() {
         if(rear == -1 || rear < front) {
-            System.out.println("Queue is empty");
-            return -1;
+            return null;
         }
 
         return arr[front];

@@ -1,7 +1,7 @@
 public class LinearQueueMain {
     public static void main(String[] args) {
 
-        LinearQueue q = new LinearQueue(10);
+        LinearQueue<Integer> q = new LinearQueue<>(10);
 
         q.enqueue(10);
         q.enqueue(20);
