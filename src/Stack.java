@@ -2,22 +2,23 @@
 
 public class Stack {
 
-    private final int size; // final size once assigned cannot be changed
+    private final int capacity; // final size once assigned cannot be changed
     private final int[] arr; // final array cannot point to a new array once assigned, so no dynamic resizing
-    private int top = -1;
+    private int top;
 
-    public Stack(int size) {
-        if(size <= 0) { // check if size is valid
+    public Stack(int capacity) {
+        if(capacity <= 0) { // check if capacity is valid
             throw new IllegalArgumentException("Size must be greater than 0.");
         }
 
-        this.size = size;
-        this.arr = new int[size];
+        this.capacity = capacity;
+        this.arr = new int[capacity];
+        this.top = -1; // stack is initially empty
     }
 
     // general methods
     public void push(int data) {
-        if(top == size - 1) {
+        if(top == capacity - 1) {
             throw new IllegalArgumentException("Stack is full. Stack overflow.");
         }
 
@@ -54,5 +55,11 @@ public class Stack {
         }
 
         return sb.toString();
+    }
+    public boolean isFull() {
+        return top == capacity - 1;
+    }
+    public boolean isEmpty() {
+        return top == -1;
     }
 }
