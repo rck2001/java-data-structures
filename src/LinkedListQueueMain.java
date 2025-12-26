@@ -1,7 +1,7 @@
 public class LinkedListQueueMain {
     public static void main(String[] args) {
 
-        LinkedListQueue q = new LinkedListQueue();
+        LinkedListQueue<Integer> q = new LinkedListQueue<>();
 
         q.enqueue(11);
         q.enqueue(22);

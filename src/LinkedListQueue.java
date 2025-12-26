@@ -1,10 +1,10 @@
-public class LinkedListQueue {
+public class LinkedListQueue<T> {
 
-    private static class Node {
-        int data;
-        Node next;
+    private static class Node<E> {
+        E data;
+        Node<E> next;
 
-        Node(int data) {
+        Node(E data) {
             this.data = data;
             this.next = null;
         }
@@ -12,12 +12,12 @@ public class LinkedListQueue {
 
     // initial state of the queue
     private int size = 0;
-    private Node front = null;
-    private Node rear = null;
+    private Node<T> front = null;
+    private Node<T> rear = null;
 
     // general methods
-    public void enqueue(int data) {
-        Node newNode = new Node(data);
+    public void enqueue(T data) {
+        Node<T> newNode = new Node<>(data);
 
         if(front == null) {
             front = newNode;
@@ -33,13 +33,13 @@ public class LinkedListQueue {
         rear = rear.next;
         size++;
     }
-    public int dequeue() {
+    public T dequeue() {
         if(isEmpty()) { // underflow check
             System.out.println("Queue is empty... Dequeue failed");
-            return -1;
+            return null;
         }
 
-        int removed = front.data; // temporarily store the data of the node to be removed
+        T removed = front.data; // temporarily store the data of the node to be removed
         front = front.next;
         size--;
 
@@ -49,9 +49,9 @@ public class LinkedListQueue {
 
         return removed;
     }
-    public int peek() {
+    public T peek() {
         if(isEmpty()) {
-            return -1;
+            return null;
         }
 
         return front.data;
@@ -66,7 +66,7 @@ public class LinkedListQueue {
 
         StringBuilder sb = new StringBuilder();
 
-        Node temp = front;
+        Node<T> temp = front;
         while(temp != null) {
             sb.append(temp.data).append(" -> ");
             temp = temp.next;
