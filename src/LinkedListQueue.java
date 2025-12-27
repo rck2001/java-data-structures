@@ -40,13 +40,13 @@ public class LinkedListQueue {
         }
 
         int removed = front.data; // temporarily store the data of the node to be removed
-        front = front.next;
-        size--;
+        front = front.next; // moves front pointer forward, i.e, successful dequeue
 
         if(front == null) { // queue is empty
             rear = null;
         }
 
+        size--;
         return removed;
     }
     public int peek() {

@@ -16,8 +16,9 @@ public class CircularQueueMain {
         q.enqueue(2);
         q.enqueue(3);
         q.enqueue(4);
-        q.enqueue(5);
+        q.enqueue(5); // overflow
 
+        System.out.println("\nElement at the front of the queue: " + q.peek());
         System.out.println("Current queue: " + q);
         System.out.println("Size: " + q.getSize());
         System.out.println("Is the Queue empty?: " + q.isEmpty());
