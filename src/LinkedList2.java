@@ -74,6 +74,7 @@ public class LinkedList2<T> {
         temp.next = newNode;
         size++;
     }
+
     public void deleteAtBeg() {
 
         if(head == null) {
@@ -147,7 +148,7 @@ public class LinkedList2<T> {
         }
     }
 
-    // utility methods
+    // display
     @Override
     public String toString() {
         Node<T> temp = head;
@@ -167,6 +168,8 @@ public class LinkedList2<T> {
 
         return sb.toString();
     }
+
+    // utility methods
     public boolean isEmpty() {
         return head == null;
         // or
@@ -179,19 +182,8 @@ public class LinkedList2<T> {
         head = null;
         size = 0;
     }
-    public void reverse() {
-        Node<T> previous = null;
-        Node<T> current = head;
-        Node<T> next = null;
-
-        while(current != null) {
-            next = current.next;
-            current.next = previous;
-            previous = current;
-            current = next;
-        }
-
-        head = previous;
+    public boolean contains(T data) {
+        return getIndexOf(data) >= 0;
     }
     public int getIndexOf(T data) {
         // returns 0-based index of the element, or -1 if not found or list is empty
@@ -209,4 +201,21 @@ public class LinkedList2<T> {
 
         return -1;
     }
+    public void reverse() {
+        Node<T> previous = null;
+        Node<T> current = head;
+        Node<T> next = null;
+
+        while(current != null) {
+            next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+
+        head = previous;
+    }
+
+    // add set and get methods
+    // use index instead of position
 }
