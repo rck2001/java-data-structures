@@ -26,6 +26,11 @@ public class DoublyLinkedListMain {
         list.addIndex(45000, 5);
         list.removeIndex(5);
         list.reverse();
+        list.addIndex(8, 1);
+        list.addIndex(7, 8);
+        list.addIndex(99, 4);
+        list.addIndex(4, 4);
+        list.removeDuplicates();
 
         System.out.println("Current list: " + list);
         System.out.println("Size: " + list.getSize());

@@ -83,6 +83,7 @@ public class DoublyLinkedList {
 
         size++;
     }
+
     public void removeFirst() {
         if(isEmpty()) {
             System.out.println("List is empty... Cannot remove");
@@ -150,6 +151,45 @@ public class DoublyLinkedList {
         temp.next = null;
 
         size--;
+    }
+    public void removeDuplicates() {
+        if(isEmpty() || size == 1) {
+            System.out.println("No duplicates to remove");
+            return;
+        }
+
+        Node current = head;
+
+        while(current != null) {
+            Node runner = current;
+
+            while(runner.next != null) {
+                if(current.data == runner.next.data) {
+                    // optional
+                    Node Duplicate = runner.next; // duplicate node to be removed
+
+                    // main logic
+                    runner.next = runner.next.next;
+                    if(runner.next != null) {
+                        runner.next.prev = runner;
+                    }
+                    else { // after the update, runner now points to null
+                        tail = runner;
+                    }
+
+                    // optional
+                    Duplicate.next = null;
+                    Duplicate.prev = null;
+
+                    size--;
+                }
+                else {
+                    runner = runner.next;
+                }
+            }
+
+            current = current.next;
+        }
     }
 
     // display
@@ -244,5 +284,5 @@ public class DoublyLinkedList {
         tail = temp;
     }
 
-    // add set, get, remove duplicates and reverse methods method
+    // add set, get, lastIndexOf
 }
