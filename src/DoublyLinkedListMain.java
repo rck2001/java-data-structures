@@ -30,10 +30,15 @@ public class DoublyLinkedListMain {
         list.addIndex(7, 8);
         list.addIndex(99, 4);
         list.addIndex(4, 4);
-        list.removeDuplicates();
+        //list.removeDuplicates();
 
         System.out.println("Current list: " + list);
         System.out.println("Size: " + list.getSize());
         System.out.println("Is the list empty?: " + list.isEmpty());
+
+        System.out.println(list.get(10));
+        list.set(2, 1);
+        list.set(5, 1);
+        list.displayForward();
     }
 }

@@ -254,6 +254,8 @@ public class DoublyLinkedList {
         return indexOf(data) >= 0;
     }
     public int indexOf(int data) {
+        if(isEmpty()) return -1; // optional
+
         Node temp = head;
         int index = 0;
 
@@ -262,6 +264,19 @@ public class DoublyLinkedList {
 
             index++;
             temp = temp.next;
+        }
+
+        return -1;
+    }
+    public int lastIndexOf(int data) {
+        if(isEmpty()) return -1; // optional
+
+        // main logic
+        Node temp = tail;
+        for(int index = size - 1; index >= 0; index--) {
+            if(temp.data == data) return index;
+
+            temp = temp.prev;
         }
 
         return -1;
@@ -284,5 +299,57 @@ public class DoublyLinkedList {
         tail = temp;
     }
 
-    // add set, get, lastIndexOf
+    // getters and setters
+    public void set(int index, int data) {
+        // check if index is valid
+        if(index < 0 || index > size - 1) {
+            throw new IndexOutOfBoundsException("Index " + index + " out of bounds for size " + size);
+        }
+
+        Node current;
+
+        if(index < size / 2) {
+            current = head;
+            for(int i = 0; i < index; i++) {
+                current = current.next;
+            }
+        }
+        else {
+            current = tail;
+            for(int i = size - 1; i > index; i--) {
+                current = current.prev;
+            }
+        }
+
+        current.data = data;
+    }
+    public int get(int index) {
+        // check if index is valid
+        if(index < 0 || index > size - 1) {
+            throw new IndexOutOfBoundsException("Index " + index + " out of bounds for size " + size);
+        }
+
+        Node current;
+
+        if(index < size / 2) { // traverse from head
+            current = head;
+            for(int i = 0; i < index; i++) {
+                current = current.next;
+            }
+        }
+        else { // traverse from tail
+            current = tail;
+            for(int i = size - 1; i > index; i--) {
+                current = current.prev;
+            }
+        }
+
+        return current.data;
+    }
+
+    /* Improvements to be made:
+     * rename the temporary traversal node to current where applicable
+     * throw exceptions instead of printing errors
+     * changes methods which take index as arguments to have index as the first parameter
+     */
 }
