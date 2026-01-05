@@ -22,13 +22,13 @@ public class DoublyLinkedListMain {
         list.removeFirst(); // removes 2
         list.removeLast(); // removes 10
         list.removeLast(); // removes 9
-        list.addIndex(99, 5);
-        list.addIndex(45000, 5);
+        list.addIndex(5, 99);
+        list.addIndex(5, 45000);
         list.removeIndex(5);
         list.reverse();
-        list.addIndex(8, 1);
-        list.addIndex(7, 8);
-        list.addIndex(99, 4);
+        list.addIndex(1, 8);
+        list.addIndex(8, 7);
+        list.addIndex(4, 99);
         list.addIndex(4, 4);
         //list.removeDuplicates();
 

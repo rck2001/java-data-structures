@@ -29,6 +29,7 @@ public class DoublyLinkedList {
             head.prev = newNode;
             head = newNode;
         }
+
         size++;
     }
     public void addLast(int data) {
@@ -42,12 +43,12 @@ public class DoublyLinkedList {
             newNode.prev = tail;
             tail = newNode;
         }
+
         size++;
     }
-    public void addIndex(int data, int index) {
+    public void addIndex(int index, int data) {
         if(index < 0 || index > size) {
-            System.out.println("Invalid index");
-            return;
+            throw new IndexOutOfBoundsException("Index " + index + " out of bounds for size " + size);
         }
 
         // index = 0 or index = size
@@ -61,33 +62,32 @@ public class DoublyLinkedList {
         }
 
         Node newNode = new Node(data);
-        Node temp;
+        Node current;
 
         if(index < size / 2) { // traverse from head
-            temp = head;
+            current = head;
             for(int i = 0; i < index; i++) {
-                temp = temp.next;
+                current = current.next;
             }
         }
         else { // traverse from tail
-            temp = tail;
+            current = tail;
             for(int i = size - 1; i > index; i--) {
-                temp = temp.prev;
+                current = current.prev;
             }
         }
 
-        newNode.next = temp;
-        newNode.prev = temp.prev;
-        temp.prev.next = newNode;
-        temp.prev = newNode;
+        newNode.next = current;
+        newNode.prev = current.prev;
+        current.prev.next = newNode;
+        current.prev = newNode;
 
         size++;
     }
 
     public void removeFirst() {
         if(isEmpty()) {
-            System.out.println("List is empty... Cannot remove");
-            return;
+            throw new IllegalStateException("Cannot remove first element from an empty list");
         }
 
         if(head == tail) { // single element
@@ -97,12 +97,12 @@ public class DoublyLinkedList {
             head = head.next;
             head.prev = null;
         }
+
         size--;
     }
     public void removeLast() {
         if(isEmpty()) {
-            System.out.println("List is empty... Cannot remove");
-            return;
+            throw new IllegalStateException("Cannot remove last element from an empty list");
         }
 
         if(head == tail) { // single element
@@ -112,12 +112,12 @@ public class DoublyLinkedList {
             tail = tail.prev;
             tail.next = null;
         }
+
         size--;
     }
     public void removeIndex(int index) {
         if(index < 0 || index > size - 1) {
-            System.out.println("Invalid index");
-            return;
+            throw new IndexOutOfBoundsException("Index " + index + " out of bounds for size " + size);
         }
 
         // first and last index
@@ -130,31 +130,30 @@ public class DoublyLinkedList {
             return;
         }
 
-        Node temp;
+        Node current;
 
         if(index < size / 2) { // traverse from head
-            temp = head;
+            current = head;
             for(int i = 0; i < index; i++) {
-                temp = temp.next;
+                current = current.next;
             }
         }
         else { // traverse from tail
-            temp = tail;
+            current = tail;
             for(int i = size - 1; i > index; i--) {
-                temp = temp.prev;
+                current = current.prev;
             }
         }
 
-        temp.prev.next = temp.next;
-        temp.next.prev = temp.prev;
-        temp.prev = null;
-        temp.next = null;
+        current.prev.next = current.next;
+        current.next.prev = current.prev;
+        current.prev = null;
+        current.next = null;
 
         size--;
     }
     public void removeDuplicates() {
         if(isEmpty() || size == 1) {
-            System.out.println("No duplicates to remove");
             return;
         }
 
@@ -166,7 +165,7 @@ public class DoublyLinkedList {
             while(runner.next != null) {
                 if(current.data == runner.next.data) {
                     // optional
-                    Node Duplicate = runner.next; // duplicate node to be removed
+                    Node duplicate = runner.next; // duplicate node to be removed
 
                     // main logic
                     runner.next = runner.next.next;
@@ -178,8 +177,8 @@ public class DoublyLinkedList {
                     }
 
                     // optional
-                    Duplicate.next = null;
-                    Duplicate.prev = null;
+                    duplicate.next = null;
+                    duplicate.prev = null;
 
                     size--;
                 }
@@ -199,12 +198,12 @@ public class DoublyLinkedList {
             return;
         }
 
-        Node temp = head;
-        while(temp != null) {
-            System.out.print(temp.data + " <-> ");
-            temp = temp.next;
+        Node current = head;
+        while(current != null) {
+            System.out.print(current.data + " <-> ");
+            current = current.next;
         }
-        System.out.println("NUll");
+        System.out.println("NULL");
     }
     public void displayBackward() {
         if(isEmpty()) {
@@ -212,10 +211,10 @@ public class DoublyLinkedList {
             return;
         }
 
-        Node temp = tail;
-        while(temp != null) {
-            System.out.print(temp.data + " <-> ");
-            temp = temp.prev;
+        Node current = tail;
+        while(current != null) {
+            System.out.print(current.data + " <-> ");
+            current = current.prev;
         }
         System.out.println("NULL");
     }
@@ -227,10 +226,10 @@ public class DoublyLinkedList {
 
         StringBuilder sb = new StringBuilder();
 
-        Node temp = head;
-        while(temp != null) {
-            sb.append(temp.data).append(" <-> ");
-            temp = temp.next;
+        Node current = head;
+        while(current != null) {
+            sb.append(current.data).append(" <-> ");
+            current = current.next;
         }
         sb.append("NULL");
 
@@ -245,8 +244,7 @@ public class DoublyLinkedList {
         return size;
     }
     public void clear() {
-        head = null;
-        tail = null;
+        head = tail = null;
         size = 0;
     }
 
@@ -256,14 +254,14 @@ public class DoublyLinkedList {
     public int indexOf(int data) {
         if(isEmpty()) return -1; // optional
 
-        Node temp = head;
+        Node current = head;
         int index = 0;
 
-        while(temp != null) {
-            if(temp.data == data) return index;
+        while(current != null) {
+            if(current.data == data) return index;
 
             index++;
-            temp = temp.next;
+            current = current.next;
         }
 
         return -1;
@@ -272,11 +270,11 @@ public class DoublyLinkedList {
         if(isEmpty()) return -1; // optional
 
         // main logic
-        Node temp = tail;
+        Node current = tail;
         for(int index = size - 1; index >= 0; index--) {
-            if(temp.data == data) return index;
+            if(current.data == data) return index;
 
-            temp = temp.prev;
+            current = current.prev;
         }
 
         return -1;
@@ -291,7 +289,8 @@ public class DoublyLinkedList {
             Node temp = current.prev;
             current.prev = current.next;
             current.next = temp;
-            current = current.prev;
+
+            current = current.prev; // helps in traversing the list
         }
 
         Node temp = head;
@@ -346,10 +345,4 @@ public class DoublyLinkedList {
 
         return current.data;
     }
-
-    /* Improvements to be made:
-     * rename the temporary traversal node to current where applicable
-     * throw exceptions instead of printing errors
-     * changes methods which take index as arguments to have index as the first parameter
-     */
 }
