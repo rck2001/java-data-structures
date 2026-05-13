@@ -1,11 +1,9 @@
 package Demo;
 
-import linkedlist.LinkedList1;
-
-public class LinkedList1Main {
+public class SinglyLinkedListMain {
     public static void main(String[] args) {
 
-        LinkedList1 list = new LinkedList1();
+        linkedlist.SinglyLinkedList list = new linkedlist.SinglyLinkedList();
 
         list.insertAtBeg(1);
         list.insertAtBeg(2);

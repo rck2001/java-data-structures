@@ -1,6 +1,6 @@
 package linkedlist;
 
-public class LinkedList2<T> {
+public class GenericLinkedList<T> {
 
     private static class Node<T> {
         // T here is not related to T in the outer class

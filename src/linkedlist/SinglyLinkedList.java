@@ -10,7 +10,7 @@ class Node {
     }
 }
 
-public class LinkedList1 {
+public class SinglyLinkedList {
 
     Node head = null;
 

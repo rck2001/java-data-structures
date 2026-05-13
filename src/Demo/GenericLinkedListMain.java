@@ -1,11 +1,11 @@
 package Demo;
 
-import linkedlist.LinkedList2;
+import linkedlist.GenericLinkedList;
 
-public class LinkedList2Main {
+public class GenericLinkedListMain {
     public static void main(String[] args) {
 
-        LinkedList2<Integer> list = new LinkedList2<>();
+        GenericLinkedList<Integer> list = new GenericLinkedList<>();
 
         list.insertAtBeg(1);
         list.insertAtBeg(2);
