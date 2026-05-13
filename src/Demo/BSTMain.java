@@ -1,3 +1,7 @@
+package Demo;
+
+import tree.BinarySearchTree;
+
 public class BSTMain {
     public static void main(String[] args) {
 

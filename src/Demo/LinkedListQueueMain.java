@@ -1,3 +1,7 @@
+package Demo;
+
+import queue.LinkedListQueue;
+
 public class LinkedListQueueMain {
     public static void main(String[] args) {
 

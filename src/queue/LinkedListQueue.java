@@ -1,3 +1,5 @@
+package queue;
+
 public class LinkedListQueue {
 
     private static class Node {

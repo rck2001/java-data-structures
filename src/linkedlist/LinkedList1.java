@@ -1,3 +1,5 @@
+package linkedlist;
+
 class Node {
     int data;
     Node next;
@@ -12,7 +14,7 @@ public class LinkedList1 {
 
     Node head = null;
 
-    void insertAtBeg(int data) {
+    public void insertAtBeg(int data) {
         Node newNode = new Node(data);
 
         if(head == null) { // when the list is empty
@@ -23,7 +25,7 @@ public class LinkedList1 {
         newNode.next = head;
         head = newNode;
     }
-    void insertAtEnd(int data) {
+    public void insertAtEnd(int data) {
         Node newNode = new Node(data);
 
         if(head == null) {
@@ -38,7 +40,7 @@ public class LinkedList1 {
 
         temp.next = newNode;
     }
-    void insertAtAnyPos(int data, int pos) {
+    public void insertAtAnyPos(int data, int pos) {
         Node newNode = new Node(data);
 
         if(head == null) {
@@ -61,7 +63,7 @@ public class LinkedList1 {
         newNode.next = temp.next;
         temp.next = newNode;
     }
-    void deleteAtBeg() {
+    public void deleteAtBeg() {
 
         if(head == null) {
             System.out.println("List is empty.");
@@ -70,7 +72,7 @@ public class LinkedList1 {
 
         head = head.next;
     }
-    void deleteAtEnd() {
+    public void deleteAtEnd() {
 
         if(head == null) {
             System.out.println("List is empty.");
@@ -89,7 +91,7 @@ public class LinkedList1 {
 
         temp.next = null;
     }
-    void deleteAtAnyPos(int pos) {
+    public void deleteAtAnyPos(int pos) {
 
         if(head == null) {
             System.out.println("List is empty.");
@@ -110,7 +112,7 @@ public class LinkedList1 {
 
         temp.next = temp.next.next;
     }
-    void display() {
+    public void display() {
         Node temp = head;
 
         // if list is empty

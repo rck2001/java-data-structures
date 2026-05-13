@@ -1,28 +1,25 @@
-// Queue is a FIFO (First In First Out) data structure
+package queue;
 
-// FALSE OVERFLOW = The queue is LOGICALLY EMPTY, but the implementation says FULL.
-// The current queue implementation has false overflow.
+public class CircularQueue {
 
-// We can change the code to reset the queue, i.e, front = rear = -1, when the queue is logically empty.
-// But that is suboptimal.
-// A circular queue fixes this.
-
-public class LinearQueue {
-
-    private int capacity;
-    private int[] arr;
+    // initial queue
+    private final int capacity;
+    private final int[] arr;
     private int front, rear;
+    private int size;
 
-    public LinearQueue(int capacity) {
+    public CircularQueue(int capacity) {
+        // initial queue
         this.capacity = capacity;
         this.arr = new int[capacity];
         this.front = -1;
         this.rear = -1;
+        this.size = 0;
     }
 
     // general methods
     public void enqueue(int data) {
-        if(rear == capacity - 1) {
+        if(isFull()) {
             System.out.println("Queue is full... Queue overflow");
             return;
         }
@@ -31,21 +28,30 @@ public class LinearQueue {
             front = 0;
         }
 
-        arr[++rear] = data;
+        rear = (rear + 1) % capacity;
+        arr[rear] = data;
+        size++;
     }
     public int dequeue() {
-        if(rear == -1 || rear < front) {
+        if(isEmpty()) {
             System.out.println("Queue is empty... Queue underflow");
             return -1;
         }
 
         int removed = arr[front];
-        front++;
+
+        if(size == 1) { // only one element is present
+            front = rear = -1; // resets the indices, i.e, the queue is now empty
+        }
+        else {
+            front = (front + 1) % capacity;
+        }
+
+        size--;
         return removed;
     }
     public int peek() {
-        if(rear == -1 || rear < front) {
-            System.out.println("Queue is empty");
+        if(isEmpty()) {
             return -1;
         }
 
@@ -55,32 +61,27 @@ public class LinearQueue {
     // display
     @Override
     public String toString() {
-        if(rear == -1 || rear < front) {
+        if(isEmpty()) {
             return "Queue is empty";
         }
 
         StringBuilder sb = new StringBuilder();
-
-        for(int i = front; i <= rear; i++) {
+        for(int i = front, count = 1; count <= size; count++, i = (i + 1) % capacity) {
             sb.append(arr[i]).append(" -> ");
         }
-        sb.append("End of the queue");
+        sb.append("End of queue");
 
         return sb.toString();
     }
 
     // utility methods
     public boolean isEmpty() {
-        return rear == -1 || rear < front;
+        return size == 0;
     }
     public boolean isFull() {
-        return rear == capacity - 1;
+        return size == capacity;
     }
     public int getSize() {
-        if(isEmpty()) {
-            return 0;
-        }
-
-        return rear - front + 1;
+        return size;
     }
 }

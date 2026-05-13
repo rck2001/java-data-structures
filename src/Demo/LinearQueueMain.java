@@ -1,3 +1,7 @@
+package Demo;
+
+import queue.LinearQueue;
+
 public class LinearQueueMain {
     public static void main(String[] args) {
 

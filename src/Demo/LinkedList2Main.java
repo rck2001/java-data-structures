@@ -1,3 +1,7 @@
+package Demo;
+
+import linkedlist.LinkedList2;
+
 public class LinkedList2Main {
     public static void main(String[] args) {
 

@@ -1,23 +1,28 @@
-public class CircularQueue {
+package queue;// Queue is a FIFO (First In First Out) data structure
 
-    // initial queue
-    private final int capacity;
-    private final int[] arr;
+// FALSE OVERFLOW = The queue is LOGICALLY EMPTY, but the implementation says FULL.
+// The current queue implementation has false overflow.
+
+// We can change the code to reset the queue, i.e, front = rear = -1, when the queue is logically empty.
+// But that is suboptimal.
+// A circular queue fixes this.
+
+public class LinearQueue {
+
+    private int capacity;
+    private int[] arr;
     private int front, rear;
-    private int size;
 
-    public CircularQueue(int capacity) {
-        // initial queue
+    public LinearQueue(int capacity) {
         this.capacity = capacity;
         this.arr = new int[capacity];
         this.front = -1;
         this.rear = -1;
-        this.size = 0;
     }
 
     // general methods
     public void enqueue(int data) {
-        if(isFull()) {
+        if(rear == capacity - 1) {
             System.out.println("Queue is full... Queue overflow");
             return;
         }
@@ -26,30 +31,21 @@ public class CircularQueue {
             front = 0;
         }
 
-        rear = (rear + 1) % capacity;
-        arr[rear] = data;
-        size++;
+        arr[++rear] = data;
     }
     public int dequeue() {
-        if(isEmpty()) {
+        if(rear == -1 || rear < front) {
             System.out.println("Queue is empty... Queue underflow");
             return -1;
         }
 
         int removed = arr[front];
-
-        if(size == 1) { // only one element is present
-            front = rear = -1; // resets the indices, i.e, the queue is now empty
-        }
-        else {
-            front = (front + 1) % capacity;
-        }
-
-        size--;
+        front++;
         return removed;
     }
     public int peek() {
-        if(isEmpty()) {
+        if(rear == -1 || rear < front) {
+            System.out.println("Queue is empty");
             return -1;
         }
 
@@ -59,27 +55,32 @@ public class CircularQueue {
     // display
     @Override
     public String toString() {
-        if(isEmpty()) {
+        if(rear == -1 || rear < front) {
             return "Queue is empty";
         }
 
         StringBuilder sb = new StringBuilder();
-        for(int i = front, count = 1; count <= size; count++, i = (i + 1) % capacity) {
+
+        for(int i = front; i <= rear; i++) {
             sb.append(arr[i]).append(" -> ");
         }
-        sb.append("End of queue");
+        sb.append("End of the queue");
 
         return sb.toString();
     }
 
     // utility methods
     public boolean isEmpty() {
-        return size == 0;
+        return rear == -1 || rear < front;
     }
     public boolean isFull() {
-        return size == capacity;
+        return rear == capacity - 1;
     }
     public int getSize() {
-        return size;
+        if(isEmpty()) {
+            return 0;
+        }
+
+        return rear - front + 1;
     }
 }

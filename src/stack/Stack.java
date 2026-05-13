@@ -1,4 +1,4 @@
-// A stack is a last in first out (LIFO) data structure
+package stack;// A stack is a last in first out (LIFO) data structure
 
 public class Stack {
 

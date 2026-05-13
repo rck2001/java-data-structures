@@ -1,3 +1,5 @@
+package stack;
+
 // LIFO data structure
 public class LinkedListStack {
 

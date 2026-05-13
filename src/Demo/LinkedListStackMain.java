@@ -1,3 +1,7 @@
+package Demo;
+
+import stack.LinkedListStack;
+
 public class LinkedListStackMain {
     public static void main(String[] args) {
 
