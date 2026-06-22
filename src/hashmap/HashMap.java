@@ -1,5 +1,7 @@
 package hashmap;
 
+import java.util.Objects;
+
 public class HashMap {
 
     private static class Node {
@@ -24,6 +26,9 @@ public class HashMap {
         this.buckets = new Node[capacity];
     }
     public HashMap(int capacity) {
+        if(capacity <= 0) {
+            throw new IllegalArgumentException("Size must be greater than 0");
+        }
         this.capacity = capacity;
         this.buckets = new Node[capacity];
     }
@@ -35,7 +40,7 @@ public class HashMap {
         // check if the key already exists
         Node current = buckets[index];
         while(current != null) {
-            if(current.key.equals(key)) {
+            if(Objects.equals(current.key, key)) {
                 current.value = value; // key found, update value
                 return; // exit
             }
@@ -63,7 +68,7 @@ public class HashMap {
         if(current == null) { // empty bucket
             return null;
         }
-        if(current.key.equals(key)) { // key present at first node
+        if(Objects.equals(current.key, key)) { // key present at first node
             buckets[index] = buckets[index].next;
             size--;
 
@@ -71,7 +76,7 @@ public class HashMap {
         }
 
         while(current.next != null) {
-            if(current.next.key.equals(key)) {
+            if(Objects.equals(current.next.key, key)) {
                 int removedValue = current.next.value;
 
                 current.next = current.next.next;
@@ -90,7 +95,7 @@ public class HashMap {
 
         Node current = buckets[index];
         while(current != null) {
-            if(current.key.equals(key)) {
+            if(Objects.equals(current.key, key)) {
                 return current.value;
             }
 
@@ -121,6 +126,27 @@ public class HashMap {
 
         return sb.toString();
     }
+    public void displayCollisionMapping() {
+        StringBuilder sb = new StringBuilder();
+
+        for(int i = 0; i < capacity; i++) {
+            sb.append("Bucket ").append(i).append(": ");
+            Node current = buckets[i];
+
+            boolean first = true;
+
+            while(current != null) {
+                if(!first) sb.append(", ");
+                sb.append(current.key).append("=").append(current.value);
+
+                current = current.next;
+                first = false;
+            }
+            sb.append("\n");
+        }
+
+        System.out.print(sb);
+    }
 
     // utility methods
     public int size() {
@@ -136,6 +162,10 @@ public class HashMap {
 
     // helpers
     private int hash(String key) {
+        if(key == null) {
+            return 0;
+        }
+
         return (key.hashCode() & 0x7fffffff) % capacity;
     }
     private void resize() {
