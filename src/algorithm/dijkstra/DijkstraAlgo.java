@@ -1,5 +1,10 @@
 package algorithm.dijkstra;
 
+/*
+ * Current implementation doesn't support zero-weight edges
+ * ADD support for zero-weight edges later
+ */
+
 public class DijkstraAlgo {
 
     private final int V;
@@ -35,6 +40,11 @@ public class DijkstraAlgo {
     }
 
     public void run() {
+        // avoid performing calculations once the algorithm is already run
+        if(computed) {
+            return;
+        }
+
         // initialise
         for(int i = 0; i < V; i++) {
             distance[i] = INF;
@@ -73,12 +83,12 @@ public class DijkstraAlgo {
 
         System.out.println("Source = " + labels[source] + "\n");
 
-        System.out.printf("%-8s %-10s %s\n", "Vertex", "Distance", "Path");
+        System.out.printf("%-8s %-12s %s\n", "Vertex", "Distance", "Path");
         System.out.println("----------------------------------------");
         for(int v = 0; v < V; v++) {
             String dist = distance[v] == INF ? "Unreachable" : String.valueOf(distance[v]);
 
-            System.out.printf("%-8s %-10s %s\n",
+            System.out.printf("%-8s %-12s %s\n",
                     labels[v],
                     dist,
                     getPath(v));
@@ -147,6 +157,10 @@ public class DijkstraAlgo {
         return minIndex;
     }
     private int getVertexIndex(String vertex) {
+        if(vertex == null) {
+            throw new NullPointerException("Vertex cannot be null");
+        }
+
         for(int i = 0; i < V; i++) {
             if(labels[i].equals(vertex))
                 return i;
