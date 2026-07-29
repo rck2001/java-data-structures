@@ -5,6 +5,8 @@ package algorithm.dijkstra;
  * ADD support for zero-weight edges later
  */
 
+import java.util.HashSet;
+
 public class DijkstraAlgo {
 
     private final int V;
@@ -86,7 +88,7 @@ public class DijkstraAlgo {
         System.out.printf("%-8s %-12s %s\n", "Vertex", "Distance", "Path");
         System.out.println("----------------------------------------");
         for(int v = 0; v < V; v++) {
-            String dist = distance[v] == INF ? "Unreachable" : String.valueOf(distance[v]);
+            String dist = (distance[v] == INF) ? "Unreachable" : String.valueOf(distance[v]);
 
             System.out.printf("%-8s %-12s %s\n",
                     labels[v],
@@ -195,5 +197,17 @@ public class DijkstraAlgo {
             throw new IllegalArgumentException("Labels cannot be empty");
         if(labels.length != graph.length)
             throw new IllegalArgumentException("Labels and graph size must match");
+
+        // no duplicate label verification
+        HashSet<String> set = new HashSet<>();
+
+        for(String label : labels) {
+            if(label == null)
+                throw new NullPointerException("Label cannot be null");
+
+            if(!set.add(label)) {
+                throw new IllegalArgumentException("Duplicate label: " + label);
+            }
+        }
     }
 }
