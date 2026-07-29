@@ -164,6 +164,28 @@ public class FloydWarshallAlgo {
         }
         System.out.println();
     }
+    public void displayAdjacencyMatrix() {
+        System.out.println("Original adjacency matrix: ");
+
+        System.out.printf("%-10s| ", "");
+        for(int i = 0; i < V; i++) {
+            System.out.printf("%-10s", labels[i]);
+        }
+        System.out.println();
+        System.out.println("_".repeat(10 * (V + 1)));
+
+        for(int i = 0; i < V; i++) {
+            System.out.printf("%-10s| ", labels[i]);
+
+            for(int j = 0; j < V; j++) {
+                String dist = (graph[i][j] == INF) ? "INF" : String.valueOf(graph[i][j]); // or Integer.toString(distance[i][j])
+                System.out.printf("%-10s", dist);
+            }
+
+            System.out.println();
+        }
+        System.out.println();
+    }
 
     // utility methods (public API)
     public String getPath(int source, int destination) {
