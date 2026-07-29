@@ -81,10 +81,39 @@ public class FloydWarshallAlgo {
     }
     public void display() {
         ensureComputed();
-        /*
-         * implement his method
-         */
-        throw new IllegalStateException("Method not implemented");
+
+        System.out.println("Shortest paths: ");
+        System.out.println("-".repeat(78));
+        System.out.printf("| %-8s | %-8s %-12s %-10s %-30s |\n",
+                "Sl. no.",
+                "Source",
+                "Destination",
+                "Distance",
+                "Path");
+        System.out.println("-".repeat(78));
+
+        for(int i = 0; i < V; i++) {
+            for(int j = 0; j < V; j++) {
+                if(j == 0) {
+                    System.out.printf("| %-8s | %-8s ",
+                            (i + 1 + "."),
+                            labels[i]);
+                }
+                else {
+                    System.out.printf("| %-8s | %-8s ",
+                            "",
+                            "");
+                }
+
+                String dist = (distance[i][j] == INF) ? "INF" : String.valueOf(distance[i][j]);
+                System.out.printf("%-12s %-10s %-30s |\n",
+                        labels[j],
+                        dist,
+                        getPath(i, j));
+            }
+
+            System.out.println("-".repeat(78));
+        }
 
     }
     public void displayDistanceMatrix() {

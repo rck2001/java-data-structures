@@ -20,12 +20,13 @@ public class FloydWarshallTest {
 
         FloydWarshallAlgo algo = new FloydWarshallAlgo(graph, labels);
 
-        algo.run();
+        algo.run(); // optional, since this is a lazy implementation
         algo.displayDistanceMatrix();
         algo.displayParentMatrix();
-        System.out.println(algo.getPath("P", "C3"));
-        System.out.println(algo.getPath(0, 6));
-        System.out.println(algo.getDistance("P", "C3"));
-        System.out.println(algo.getDistance(0, 6));
+        // System.out.println(algo.getPath("P", "C3"));
+        // System.out.println(algo.getPath(0, 6));
+        // System.out.println(algo.getDistance("P", "C3"));
+        // System.out.println(algo.getDistance(0, 6));
+        algo.display();
     }
 }
