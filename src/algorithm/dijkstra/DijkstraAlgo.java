@@ -5,6 +5,13 @@ package algorithm.dijkstra;
  * ADD support for zero-weight edges later
  */
 
+/* DIJKSTRA'S ALGORITHM
+ * This is an adjacency matrix implementation
+ * Single-source shortest path algorithm
+ * Time complexity = O(V²)
+ * Space complexity = O(V²)
+ */
+
 import java.util.HashSet;
 
 public class DijkstraAlgo {
