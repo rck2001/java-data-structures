@@ -3,6 +3,15 @@ package algorithm.floydwarshall;
 import java.util.HashSet;
 import static algorithm.Constants.INF;
 
+/* FLYOD-WARSHALL ALGORITHM
+ * All-pairs shortest path algorithm
+ * Time complexity : O(V³)
+ * Space complexity : O(V²)
+ */
+
+// The code assumes INF = Integer.MAX_VALUE
+// Integer overflow is prevented during distance relaxation
+
 public class FloydWarshallAlgo {
 
     private final int V;
@@ -42,13 +51,18 @@ public class FloydWarshallAlgo {
 
         // main logic
         for(int k = 0; k < V; k++) {
+
             for(int i = 0; i < V; i++) {
                 for(int j = 0; j < V; j++) {
+                    // We are casting one of the int values to long...
+                    // So that long addition is performed...
+                    // And integer overflow doesn't occur
+                    long newDistance = (long) distance[i][k] + distance[k][j];
 
                     if(distance[i][k] != INF &&
                             distance[k][j] != INF &&
-                            (distance[i][k] + distance[k][j]) < distance[i][j]) {
-                        distance[i][j] = distance[i][k] + distance[k][j];
+                            newDistance < distance[i][j]) {
+                        distance[i][j] = (int) newDistance;
                         parent[i][j] = parent[k][j];
                     }
                 }
@@ -66,9 +80,7 @@ public class FloydWarshallAlgo {
         return String.format("FloydWarshallAlgorithm{Vertices=%d}", V);
     }
     public void display() {
-        if(!computed) {
-            run();
-        }
+        ensureComputed();
         /*
          * implement his method
          */
@@ -76,9 +88,7 @@ public class FloydWarshallAlgo {
 
     }
     public void displayDistanceMatrix() {
-        if(!computed) {
-            run();
-        }
+        ensureComputed();
 
         System.out.println("Shortest Distance matrix for the graph: ");
         System.out.printf("%-10s| ", "");
@@ -101,9 +111,7 @@ public class FloydWarshallAlgo {
         System.out.println();
     }
     public void displayParentMatrix() {
-        if(!computed) {
-            run();
-        }
+        ensureComputed();
 
         System.out.println("Parent matrix for the graph: ");
         System.out.printf("%-10s| ", "");
@@ -128,13 +136,13 @@ public class FloydWarshallAlgo {
         System.out.println();
     }
 
-    // utility methods
+    // utility methods (public API)
     public String getPath(int source, int destination) {
         if(source < 0 || source >= V || destination < 0 || destination >= V) {
             throw new IllegalArgumentException("Vertex doesn't exist");
         }
 
-        if(!computed) run();
+        ensureComputed();
 
         // main logic
         if(distance[source][destination] == INF) {
@@ -152,7 +160,7 @@ public class FloydWarshallAlgo {
             throw new IllegalArgumentException("Vertex doesn't exist");
         }
 
-        if(!computed) run();
+        ensureComputed();
 
         // main logic
         return distance[source][destination];
@@ -232,5 +240,8 @@ public class FloydWarshallAlgo {
         }
 
         throw new IllegalArgumentException("Vertex doesn't exist");
+    }
+    private void ensureComputed() {
+        if(!computed) run();
     }
 }
